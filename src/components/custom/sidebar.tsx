@@ -1,5 +1,7 @@
 import React from "react";
 
+import Image from "next/image";
+
 import { ArrowDownToLine, Code } from "lucide-react";
 import { LuLinkedin, LuGithub } from "react-icons/lu";
 
@@ -11,7 +13,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import MainMenu from "./main-menu";
-import Image from "next/image";
 import { Button } from "../ui/button";
 
 const socialMedias = [
