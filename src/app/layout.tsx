@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Mulish } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/custom/theme-provider";
+import Sidebar from "@/components/custom/sidebar";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const mulish = Mulish({
+  variable: "--font-mulish",
+  weight: ["200", "300", "500", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -24,11 +20,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning={true}>
+      <body className={`${mulish.className} antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div>
+            <Sidebar>{children}</Sidebar>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
