@@ -1,9 +1,20 @@
 "use client";
 
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
-import ColorTheme from "./color-theme";
+
+import Link from "next/link";
+import { EllipsisVertical } from "lucide-react";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import ColorTheme from "@/components/custom/color-theme";
 
 const menuLinks = [
   {
@@ -60,23 +71,58 @@ export default function MainMenu() {
   }, []);
 
   return (
-    <div className="relative w-[50%]">
-      <div className="fixed flex items-center min-w-[64.5%] justify-between">
-        <section className="space-x-5">
-          {menuLinks.map((menu, index) => (
-            <Link key={index} href={menu.url} passHref>
-              <Button
-                variant={activeLink === menu.url ? "outline" : "ghost"}
-                className=" rounded-full"
-              >
-                {menu.title}
-              </Button>
-            </Link>
-          ))}
-        </section>
-        <section>
-          <ColorTheme />
-        </section>
+    <div>
+      <div className="flex justify-end lg:hidden">
+        <Sheet>
+          <SheetTrigger asChild>
+            <EllipsisVertical />
+          </SheetTrigger>
+          <SheetContent side={"right"}>
+            <SheetHeader>
+              <SheetTitle className="sr-only">Main Menu</SheetTitle>
+              <SheetDescription className="sr-only">Main Menu</SheetDescription>
+            </SheetHeader>
+
+            <div className="flex flex-col justify-between h-full">
+              <section className="flex flex-col gap-5">
+                {menuLinks.map((menu, index) => (
+                  <Link key={index} href={menu.url} passHref>
+                    <Button
+                      variant={activeLink === menu.url ? "outline" : "ghost"}
+                      className=" rounded-full backdrop-blur-sm"
+                    >
+                      {menu.title}
+                    </Button>
+                  </Link>
+                ))}
+              </section>
+
+              <section>
+                <ColorTheme />
+              </section>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      <div className="hidden lg:block relative w-[50%]">
+        <div className="fixed flex items-center min-w-[64.5%] justify-between">
+          <section className="space-x-5">
+            {menuLinks.map((menu, index) => (
+              <Link key={index} href={menu.url} passHref>
+                <Button
+                  variant={activeLink === menu.url ? "outline" : "ghost"}
+                  className=" rounded-full backdrop-blur-sm"
+                >
+                  {menu.title}
+                </Button>
+              </Link>
+            ))}
+          </section>
+          <section>
+            <ColorTheme />
+          </section>
+        </div>
       </div>
     </div>
   );
