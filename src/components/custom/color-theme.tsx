@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 
 export default function ColorTheme() {
   const { setTheme, theme, systemTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [rotating, setRotating] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [rotating, setRotating] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
@@ -32,7 +32,7 @@ export default function ColorTheme() {
   };
 
   return (
-    <div className="flex justify-center gap-4">
+    <div className="flex lg:justify-center justify-start gap-4">
       <Button
         variant="ghost"
         size="icon"
