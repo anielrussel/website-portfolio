@@ -79,7 +79,7 @@ export default function Sidebar({
     return (
         <div className="flex lg:gap-10 gap-0">
             {/* MOBILE VIEW */}
-            <div className="lg:hidden block">
+            <div className="lg:hidden block absolute">
                 <Sheet>
                     <SheetTrigger asChild>
                         <Menu />
