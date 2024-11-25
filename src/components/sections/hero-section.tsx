@@ -45,36 +45,40 @@ export default function HeroSection() {
             />
             {/* BACKGROUNDS */}
 
-            <div className="mt-[20%] space-y-10 lg:mt-0">
-                <h1 className="text-balance text-4xl font-black leading-none lg:text-7xl lg:leading-tight">
-                    I'm Russel Aniel, Web Developer
-                </h1>
-                <section className="space-x-5">
-                    <Button
-                        variant={"outline"}
-                        className="rounded-full text-sm"
-                    >
-                        My Works <FileCode2 />
-                    </Button>
-                    <Button variant={"ghost"} className="rounded-full">
-                        Download CV <ArrowDownToLine />
-                    </Button>
+            <div className="flex flex-col items-center lg:text-left text-center">
+                <div className="mt-[20%] space-y-10 lg:mt-0">
+                    <h1 className="text-balance text-4xl font-black leading-none lg:text-7xl lg:leading-tight">
+                        I'm Russel Aniel, Web Developer
+                    </h1>
+                    <section className="space-x-5">
+                        <Button
+                            variant={"outline"}
+                            className="rounded-full text-sm"
+                        >
+                            My Works <FileCode2 />
+                        </Button>
+                        <Button variant={"ghost"} className="rounded-full">
+                            Download CV <ArrowDownToLine />
+                        </Button>
+                    </section>
+                </div>
+
+                <section className="absolute bottom-0 m-[25%] lg:right-0 lg:m-0">
+                    <section className="relative">
+                        <div className="animate-spin-slow">
+                            <CircularText
+                                text="SCROLL FOR MORE * SCROLL FOR MORE * SCROLL FOR MORE *"
+                                radius={70}
+                                padding={10}
+                                color={
+                                    currentTheme === "dark" ? "white" : "black"
+                                } // Set color based on theme
+                            />
+                        </div>
+                        <ArrowDown className="absolute right-[40%] top-[40%]" />
+                    </section>
                 </section>
             </div>
-
-            <section className="absolute bottom-0 m-[25%] lg:right-0 lg:m-0">
-                <section className="relative">
-                    <div className="animate-spin-slow">
-                        <CircularText
-                            text="SCROLL FOR MORE * SCROLL FOR MORE * SCROLL FOR MORE *"
-                            radius={70}
-                            padding={10}
-                            color={currentTheme === "dark" ? "white" : "black"} // Set color based on theme
-                        />
-                    </div>
-                    <ArrowDown className="absolute right-[40%] top-[40%]" />
-                </section>
-            </section>
         </div>
     );
 }
