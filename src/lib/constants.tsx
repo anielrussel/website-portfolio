@@ -1,4 +1,7 @@
-import AboutMe from "@/components/sections/about-me";
+import { LuGithub, LuLinkedin } from "react-icons/lu";
+
+import { Mail, Smartphone } from "lucide-react";
+
 import ContactMe from "@/components/sections/contact-me";
 import HeroSection from "@/components/sections/hero-section";
 import Projects from "@/components/sections/projects";
@@ -23,12 +26,12 @@ export const pages = [
         url: "#skills",
         component: <Skills />,
     },
-    {
-        id: "about-me",
-        title: "About Me",
-        url: "#about-me",
-        component: <AboutMe />,
-    },
+    // {
+    //     id: "about-me",
+    //     title: "About Me",
+    //     url: "#about-me",
+    //     component: <AboutMe />,
+    // },
     {
         id: "contact-me",
         title: "Contact Me",
@@ -62,7 +65,7 @@ export const projects = [
                     ],
                 },
                 image: {
-                    src: "/projects/ESS.png",
+                    src: "/projects/ESS.webp",
                     altText: "ESS",
                 },
             },
@@ -83,7 +86,7 @@ export const projects = [
                     ],
                 },
                 image: {
-                    src: "/projects/Website.png",
+                    src: "/projects/Website.webp",
                     altText: "Company Website",
                 },
             },
@@ -104,7 +107,7 @@ export const projects = [
                     ],
                 },
                 image: {
-                    src: "/projects/E-commerce.png",
+                    src: "/projects/E-commerce.webp",
                     altText: "E-commerce",
                 },
             },
@@ -126,7 +129,7 @@ export const projects = [
                     ],
                 },
                 image: {
-                    src: "/projects/Inventory.png",
+                    src: "/projects/Inventory.webp",
                     altText: "Mini Inventory",
                 },
             },
@@ -141,6 +144,10 @@ export const skills = [
             {
                 title: "Next.js",
                 icon: "/skills/nextjs.svg",
+            },
+            {
+                title: "Typescript",
+                icon: "/skills/typescript.svg",
             },
             {
                 title: "Tailwind",
@@ -163,6 +170,20 @@ export const skills = [
                 icon: "/skills/axios.svg",
             },
         ],
+        frontend: [
+            {
+                title: "Reactjs",
+                icon: "/skills/react.svg",
+            },
+            {
+                title: "Framer Motion",
+                icon: "/skills/framer.svg",
+            },
+            {
+                title: "Figma",
+                icon: "/skills/figma.svg",
+            },
+        ],
         backend: [
             {
                 title: ".Net Core",
@@ -181,31 +202,54 @@ export const skills = [
                 icon: "/skills/mongodb.svg",
             },
             {
-                title: "Figma",
-                icon: "/skills/figma.svg",
+                title: "Pocketbase",
+                icon: "/skills/pocketbase.svg",
+            },
+            {
+                title: "Strapi CMS",
+                icon: "/skills/strapi.svg",
             },
         ],
-        frontend: [
+        others: [
             {
-                title: ".Net Core",
-                icon: "/skills/net.svg",
+                title: "Azure",
+                icon: "/skills/azure.svg",
             },
             {
-                title: "SQL Server",
-                icon: "/skills/server.svg",
+                title: "GitHub",
+                icon: "/skills/github.svg",
             },
             {
-                title: "Nodejs",
-                icon: "/skills/nodejs.svg",
+                title: "Git",
+                icon: "/skills/git.svg",
             },
             {
-                title: "Mongo DB",
-                icon: "/skills/mongodb.svg",
-            },
-            {
-                title: "Figma",
-                icon: "/skills/figma.svg",
+                title: "Postman",
+                icon: "/skills/postman.svg",
             },
         ],
+    },
+];
+
+export const contacts = [
+    {
+        title: "anielrussel13@gmail.com",
+        url: null,
+        icon: Mail,
+    },
+    {
+        title: "09099131902",
+        url: null,
+        icon: Smartphone,
+    },
+    {
+        title: "LinkedIn",
+        url: "https://www.linkedin.com/in/russel-aniel-48353820b/",
+        icon: LuLinkedin,
+    },
+    {
+        title: "GitHub",
+        url: "https://github.com/anielrussel",
+        icon: LuGithub,
     },
 ];
