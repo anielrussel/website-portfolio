@@ -1,83 +1,119 @@
 "use client";
 
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
-import ColorTheme from "./color-theme";
 
-const menuLinks = [
-  {
-    title: "Home",
-    url: "#home",
-  },
-  {
-    title: "About Me",
-    url: "#about-me",
-  },
-  {
-    title: "Skills",
-    url: "#skills",
-  },
-  {
-    title: "Projects",
-    url: "#projects",
-  },
-  {
-    title: "Contact Me",
-    url: "#contact-me",
-  },
-];
+import Link from "next/link";
+
+import { EllipsisVertical } from "lucide-react";
+
+import ColorTheme from "@/components/custom/color-theme";
+import { Button } from "@/components/ui/button";
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
+import { pages } from "@/lib/constants";
 
 export default function MainMenu() {
-  const [activeLink, setActiveLink] = useState(menuLinks[0].url);
+    const [activeLink, setActiveLink] = useState(pages[0].url);
 
-  useEffect(() => {
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveLink(`#${entry.target.id}`); // Update active tab to the intersecting section
-        }
-      });
-    };
+    useEffect(() => {
+        const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                console.log(entry);
+                if (entry.isIntersecting) {
+                    setActiveLink(`#${entry.target.id}`); // Update active tab to the intersecting section
+                }
+            });
+        };
 
-    const observer = new IntersectionObserver(handleIntersection, {
-      root: null, // Use the viewport as the root
-      threshold: 0.5, // Trigger when 50% of the element is visible
-    });
+        const timeout = setTimeout(() => {
+            const observer = new IntersectionObserver(handleIntersection, {
+                root: null,
+                threshold: 0.5,
+            });
 
-    // Observe all sections by their `id`
-    menuLinks.forEach((link) => {
-      const section = document.querySelector(link.url);
-      if (section) {
-        observer.observe(section);
-      }
-    });
+            pages.forEach((link) => {
+                const section = document.querySelector(link.url);
+                if (section) observer.observe(section);
+            });
 
-    // Cleanup observer on unmount
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+            return () => observer.disconnect();
+        }, 0);
 
-  return (
-    <div className="relative w-[50%]">
-      <div className="fixed flex items-center min-w-[64.5%] justify-between">
-        <section className="space-x-5">
-          {menuLinks.map((menu, index) => (
-            <Link key={index} href={menu.url} passHref>
-              <Button
-                variant={activeLink === menu.url ? "outline" : "ghost"}
-                className=" rounded-full"
-              >
-                {menu.title}
-              </Button>
-            </Link>
-          ))}
-        </section>
-        <section>
-          <ColorTheme />
-        </section>
-      </div>
-    </div>
-  );
+        return () => clearTimeout(timeout);
+    }, []);
+
+    return (
+        <div>
+            <div className="flex justify-end lg:hidden">
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <EllipsisVertical />
+                    </SheetTrigger>
+                    <SheetContent side={"right"}>
+                        <SheetHeader>
+                            <SheetTitle className="sr-only">
+                                Main Menu
+                            </SheetTitle>
+                            <SheetDescription className="sr-only">
+                                Main Menu
+                            </SheetDescription>
+                        </SheetHeader>
+
+                        <div className="flex h-full flex-col justify-between">
+                            <section className="flex flex-col gap-5">
+                                {pages.map((menu, index) => (
+                                    <Link key={index} href={menu.url} passHref>
+                                        <Button
+                                            variant={
+                                                activeLink === menu.url
+                                                    ? "outline"
+                                                    : "ghost"
+                                            }
+                                            className="rounded-full backdrop-blur-sm"
+                                        >
+                                            {menu.title}
+                                        </Button>
+                                    </Link>
+                                ))}
+                            </section>
+
+                            <section>
+                                <ColorTheme />
+                            </section>
+                        </div>
+                    </SheetContent>
+                </Sheet>
+            </div>
+
+            <div className="relative hidden w-[50%] lg:block">
+                <div className="fixed flex min-w-[64.5%] items-center justify-between z-50">
+                    <section className="space-x-5">
+                        {pages.map((menu, index) => (
+                            <Link key={index} href={menu.url} passHref>
+                                <Button
+                                    variant={
+                                        activeLink === menu.url
+                                            ? "outline"
+                                            : "ghost"
+                                    }
+                                    className="rounded-full backdrop-blur-sm"
+                                >
+                                    {menu.title}
+                                </Button>
+                            </Link>
+                        ))}
+                    </section>
+                    <section>
+                        <ColorTheme />
+                    </section>
+                </div>
+            </div>
+        </div>
+    );
 }
