@@ -5,6 +5,7 @@ import { LuGithub, LuLinkedin } from "react-icons/lu";
 
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
 
 import { ArrowDownToLine, Code, Menu } from "lucide-react";
 
@@ -25,17 +26,23 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const socialMedias = [
     {
         title: "LinkedIn",
         icon: LuLinkedin,
-        url: "",
+        url: "https://www.linkedin.com/in/russel-aniel-48353820b/",
     },
     {
         title: "Github",
         icon: LuGithub,
-        url: "",
+        url: "https://github.com/anielrussel",
     },
 ];
 
@@ -101,7 +108,7 @@ export default function Sidebar({
                                 </div>
                                 <div className=" relative h-52 rounded-xl w-full border">
                                     <Image
-                                        src={"/joyboy.jpg"}
+                                        src={"/profile.webp"}
                                         alt="profile"
                                         fill
                                         objectFit="cover"
@@ -115,7 +122,22 @@ export default function Sidebar({
                                             key={index}
                                             className="border p-2 rounded-full"
                                         >
-                                            {<social.icon />}
+                                            <TooltipProvider>
+                                                <Tooltip>
+                                                    <TooltipTrigger asChild>
+                                                        <Link
+                                                            href={social.url}
+                                                            target="_blank"
+                                                            passHref
+                                                        >
+                                                            {<social.icon />}
+                                                        </Link>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        {social.title}
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
                                         </section>
                                     ))}
                                 </div>
@@ -163,14 +185,14 @@ export default function Sidebar({
                             <div className="flex gap-3 items-center pb-2">
                                 {currentTheme === "dark" ? (
                                     <Image
-                                        src={"/white_logo.png"}
+                                        src={"/white_logo.webp"}
                                         alt="logo"
                                         width={60}
                                         height={0}
                                     />
                                 ) : (
                                     <Image
-                                        src={"/dark_logo.png"}
+                                        src={"/dark_logo.webp"}
                                         alt="logo"
                                         width={60}
                                         height={0}
@@ -184,7 +206,7 @@ export default function Sidebar({
                             </div>
                             <div className=" relative h-52 rounded-xl w-full border">
                                 <Image
-                                    src={"/profile.jpg"}
+                                    src={"/profile.webp"}
                                     alt="profile"
                                     fill
                                     objectFit="cover"
@@ -198,7 +220,22 @@ export default function Sidebar({
                                         key={index}
                                         className="border p-2 rounded-full"
                                     >
-                                        {<social.icon />}
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <Link
+                                                        href={social.url}
+                                                        target="_blank"
+                                                        passHref
+                                                    >
+                                                        {<social.icon />}
+                                                    </Link>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    {social.title}
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
                                     </section>
                                 ))}
                             </div>
@@ -220,12 +257,14 @@ export default function Sidebar({
                         </section>
 
                         <section>
-                            <Button
-                                variant={"default"}
-                                className="rounded-full w-full"
-                            >
-                                Download CV <ArrowDownToLine />
-                            </Button>
+                            <Link href={"/Russel M. Aniel.pdf"} download>
+                                <Button
+                                    variant={"default"}
+                                    className="rounded-full w-full"
+                                >
+                                    Download CV <ArrowDownToLine />
+                                </Button>
+                            </Link>
                         </section>
                     </div>
                 </CardContent>

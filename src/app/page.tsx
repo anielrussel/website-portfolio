@@ -9,7 +9,7 @@ export default function Home() {
     };
 
     return (
-        <main>
+        <main className="space-y-60">
             {pages.map((section, index) => (
                 <div key={index}>
                     <a onClick={() => scrollToSection(section.title)}>

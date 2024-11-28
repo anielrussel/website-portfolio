@@ -25,10 +25,10 @@ export default function Projects() {
     const developments = projects.find(
         (proj) => proj.developments
     )?.developments;
-    const designs = projects.find((proj) => proj.designs)?.designs;
+    // const designs = projects.find((proj) => proj.designs)?.designs;
 
     return (
-        <div id="projects" className="mt-[13%] gap-10 my-32 space-y-16">
+        <div id="projects" className="mt-[13%] gap-10 space-y-10">
             <section className="space-y-2">
                 <span className="flex gap-1 items-center w-[10%] rounded-full border p-2 text-xs">
                     <Code size={15} /> <p>Projects</p>
