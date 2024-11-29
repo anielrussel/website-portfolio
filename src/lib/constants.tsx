@@ -46,7 +46,7 @@ export const projects = [
             {
                 title: "Employee Self Service (ESS)",
                 description:
-                    "This is a sample description text for Employee Self Service.",
+                    "This project is a web application designed to streamline employee management. It features secure authentication, tools for managing employee profiles and documents, attendance tracking, scheduling, and functionalities for handling leave entitlements, forms, etc.",
                 url: null,
                 githubUrl: null,
                 stacks: {
@@ -72,7 +72,7 @@ export const projects = [
             {
                 title: "Company Website",
                 description:
-                    "This is a sample description text for Company Website",
+                    "A static website project focuses on creating a visually appealing and responsive online presence for the company, showcasing its profile, services, products or solutions.",
                 url: "https://www.commerceone.com.ph/",
                 githubUrl: null,
                 stacks: {
@@ -93,7 +93,7 @@ export const projects = [
             {
                 title: "Ashley Joy's Flower Shop",
                 description:
-                    "This is a sample description text for Ashley Joy's Flower Shop e-commerce website",
+                    "The Ashley Joy's Flowershop website is a simple e-commerce platform built with the MERN stack, offering a wide range of floral products. This is a personal project that helps me further enhance my skills in coding.",
                 url: "https://ashley-e-commerce-mern.vercel.app/",
                 githubUrl:
                     "https://github.com/anielrussel/Ashley-ECommerce-MERN",
@@ -114,7 +114,7 @@ export const projects = [
             {
                 title: "Mini Inventory App",
                 description:
-                    "This is a sample description text for Mini Inventory App",
+                    "One of my personal projects-The Mini Inventory System is a MERN-based web application for managing inventory. It features functionality for tracking products such as Creating, Displaying, Updating, and Deleting products, with a clean and user-friendly interface",
                 url: "https://inventory-system-mernapp.vercel.app/",
                 githubUrl:
                     "https://github.com/anielrussel/Inventory-System-MERNAPP",

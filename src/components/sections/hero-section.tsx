@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
 
 import { ArrowDown, ArrowDownToLine, FileCode2 } from "lucide-react";
 
@@ -54,12 +55,23 @@ export default function HeroSection() {
                         <Button
                             variant={"outline"}
                             className="rounded-full text-sm"
+                            onClick={() => scrollTo(0, 800)}
                         >
                             My Works <FileCode2 />
                         </Button>
-                        <Button variant={"ghost"} className="rounded-full">
-                            Download CV <ArrowDownToLine />
-                        </Button>
+
+                        <Link
+                            href="/Russel M. Aniel.pdf"
+                            download
+                            target="_blank"
+                        >
+                            <Button
+                                variant={"outline"}
+                                className="rounded-full"
+                            >
+                                Download CV <ArrowDownToLine />
+                            </Button>
+                        </Link>
                     </section>
                 </div>
 
