@@ -257,7 +257,11 @@ export default function Sidebar({
                         </section>
 
                         <section>
-                            <Link href={"/Russel M. Aniel.pdf"} download>
+                            <Link
+                                href={"/Russel M. Aniel.pdf"}
+                                download
+                                target="_blank"
+                            >
                                 <Button
                                     variant={"default"}
                                     className="rounded-full w-full"

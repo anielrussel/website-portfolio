@@ -117,7 +117,7 @@ export default function Projects() {
                                                 )}
                                             </div>
                                         </span>
-                                        <h2 className="text-base pb-5">
+                                        <h2 className="text-base pb-5 font-light">
                                             {proj.description}
                                         </h2>
                                         <div className="space-y-2">

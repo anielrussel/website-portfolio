@@ -1,5 +1,8 @@
 import React from "react";
 
+import Link from "next/link";
+
+import { Button } from "../ui/button";
 import { Code } from "lucide-react";
 
 import {
@@ -31,25 +34,21 @@ export default function ContactMe() {
                             <CardDescription></CardDescription>
                         </CardHeader>
                         <CardContent className="p-4">
-                            <div>
-                                {!contact.url ? (
-                                    <div className="flex items-center justify-center gap-2">
-                                        {<contact.icon size={20} />}
-                                        <p>{contact.title}</p>
-                                    </div>
-                                ) : (
-                                    <div className="flex items-center justify-center gap-2">
-                                        {
-                                            <contact.icon
-                                                size={20}
-                                                href={contact.url}
-                                                target="_blank"
-                                            />
-                                        }
-                                        <p>{contact.title}</p>
-                                    </div>
-                                )}
-                            </div>
+                            {!contact.url ? (
+                                <div className="flex items-center justify-center gap-2">
+                                    {<contact.icon size={20} />}
+                                    <p>{contact.title}</p>
+                                </div>
+                            ) : (
+                                <Link
+                                    href={contact.url}
+                                    target="_blank"
+                                    className="flex items-center justify-center gap-2"
+                                >
+                                    {<contact.icon size={20} />}
+                                    <p>{contact.title}</p>
+                                </Link>
+                            )}
                         </CardContent>
                     </Card>
                 ))}
