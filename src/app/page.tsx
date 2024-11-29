@@ -12,9 +12,9 @@ export default function Home() {
         <main className="space-y-60">
             {pages.map((section, index) => (
                 <div key={index}>
-                    <a onClick={() => scrollToSection(section.title)}>
+                    <div onClick={() => scrollToSection(section.title)}>
                         {section.component}
-                    </a>
+                    </div>
                 </div>
             ))}
         </main>
