@@ -2,7 +2,6 @@ import React from "react";
 
 import Link from "next/link";
 
-import { Button } from "../ui/button";
 import { Code } from "lucide-react";
 
 import {
