@@ -21,7 +21,7 @@ export default function ContactMe() {
                     <Code size={15} /> <p>Contact Me</p>
                 </span>
                 <h1 className="lg:text-6xl text-3xl w-[80%] font-medium text-pretty">
-                    Let's make an awesome project together test
+                    Let's make an awesome project together
                 </h1>
             </section>
 
