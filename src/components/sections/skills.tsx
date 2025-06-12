@@ -58,7 +58,7 @@ export default function Skills() {
             <section className="grid lg:grid-cols-3 gap-10">
                 <div>
                     <h1 className="text-xs">Frontend:</h1>
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 flex-wrap">
                         {frontendStack?.map((front, index) => (
                             <Card key={index} className="w-20 h-20">
                                 <CardHeader className="sr-only">
@@ -138,7 +138,7 @@ export default function Skills() {
                 </div>
             </section>
 
-            <section>
+            {/* <section>
                 <p className="text-base font-light">
                     I have a solid understanding of best coding practices,
                     design patterns, and project methodologies like Agile Scrum.
@@ -156,7 +156,7 @@ export default function Skills() {
                     steps. This approach helps me build reliable software that
                     meets project goals efficiently.
                 </p>
-            </section>
+            </section> */}
         </div>
     );
 }

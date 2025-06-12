@@ -103,7 +103,7 @@ export default function Sidebar({
                                 <div className="flex gap-3 items-center pb-2">
                                     <Code size={60} />
                                     <h1 className="text-3xl font-semibold">
-                                        John Doe
+                                        Russel Aniel
                                     </h1>
                                 </div>
                                 <div className=" relative h-52 rounded-xl w-full border">
