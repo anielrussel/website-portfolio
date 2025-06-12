@@ -158,12 +158,12 @@ export const skills = [
                 icon: "/skills/redux.svg",
             },
             {
-                title: "Shadcn",
-                icon: "/skills/shadcn.svg",
+                title: "Zustand",
+                icon: "/skills/zustand.svg",
             },
             {
-                title: "Ant Design",
-                icon: "/skills/antd.svg",
+                title: "Shadcn",
+                icon: "/skills/shadcn.svg",
             },
             {
                 title: "Axios",
@@ -182,6 +182,14 @@ export const skills = [
             {
                 title: "Figma",
                 icon: "/skills/figma.svg",
+            },
+            {
+                title: "Ant Design",
+                icon: "/skills/antd.svg",
+            },
+             {
+                title: "HeroUI",
+                icon: "/skills/heroui.svg",
             },
         ],
         backend: [
