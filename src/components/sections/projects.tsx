@@ -1,29 +1,26 @@
-import React from "react";
-import { LuGithub, LuGlobe } from "react-icons/lu";
-
-import Image from "next/image";
-
-import { Code } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { projects } from "@/lib/constants";
+} from '@/components/ui/tooltip';
+import { projects } from '@/lib/constants';
+import { Code } from 'lucide-react';
+import Image from 'next/image';
+import React from 'react';
+import { LuGithub, LuGlobe } from 'react-icons/lu';
 
 export default function Projects() {
     const developments = projects.find(
-        (proj) => proj.developments
+        (proj) => proj.developments,
     )?.developments;
     // const designs = projects.find((proj) => proj.designs)?.designs;
 
@@ -67,13 +64,13 @@ export default function Projects() {
                                                             >
                                                                 <Button
                                                                     variant={
-                                                                        "ghost"
+                                                                        'ghost'
                                                                     }
                                                                     className="p-2"
                                                                     onClick={() =>
                                                                         window.open(
                                                                             proj.githubUrl,
-                                                                            "_blank"
+                                                                            '_blank',
                                                                         )
                                                                     }
                                                                 >
@@ -95,13 +92,13 @@ export default function Projects() {
                                                             >
                                                                 <Button
                                                                     variant={
-                                                                        "ghost"
+                                                                        'ghost'
                                                                     }
                                                                     className="p-2"
                                                                     onClick={() =>
                                                                         window.open(
                                                                             proj.url,
-                                                                            "_blank"
+                                                                            '_blank',
                                                                         )
                                                                     }
                                                                 >
@@ -135,7 +132,7 @@ export default function Projects() {
                                                                 >
                                                                     {back}
                                                                 </li>
-                                                            )
+                                                            ),
                                                         )}
                                                     </ul>
                                                 </>
@@ -156,7 +153,7 @@ export default function Projects() {
                                                                 >
                                                                     {front}
                                                                 </li>
-                                                            )
+                                                            ),
                                                         )}
                                                     </ul>
                                                 </>

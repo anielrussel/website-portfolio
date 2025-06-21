@@ -1,12 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-
-import { useTheme } from "next-themes";
-
-import { Moon, Sun } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import React, { useEffect, useState } from 'react';
 
 export default function ColorTheme() {
     const { setTheme, theme, systemTheme } = useTheme();
@@ -22,7 +19,7 @@ export default function ColorTheme() {
     }
 
     // Determine the active theme
-    const currentTheme = theme === "system" ? systemTheme : theme;
+    const currentTheme = theme === 'system' ? systemTheme : theme;
 
     // Handle theme toggle with rotation
     const handleToggleTheme = (newTheme: string) => {
@@ -41,17 +38,17 @@ export default function ColorTheme() {
                 aria-label="Toggle theme"
                 onClick={() =>
                     handleToggleTheme(
-                        currentTheme === "dark" ? "light" : "dark"
+                        currentTheme === 'dark' ? 'light' : 'dark',
                     )
                 }
                 className="relative"
             >
                 <div
                     className={`transition-transform duration-300 ${
-                        rotating ? "animate-spin" : ""
+                        rotating ? 'animate-spin' : ''
                     }`}
                 >
-                    {currentTheme === "dark" ? (
+                    {currentTheme === 'dark' ? (
                         <Sun className="h-[1.5rem] w-[1.5rem]" />
                     ) : (
                         <Moon className="h-[1.5rem] w-[1.5rem]" />

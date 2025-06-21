@@ -1,19 +1,17 @@
-import type { Metadata } from "next";
-import { Mulish } from "next/font/google";
+import { ThemeProvider } from '@/components/custom/theme-provider';
+import type { Metadata } from 'next';
+import { Mulish } from 'next/font/google';
 
-import "./globals.css";
-
-import Sidebar from "@/components/custom/sidebar";
-import { ThemeProvider } from "@/components/custom/theme-provider";
+import './globals.css';
 
 const mulish = Mulish({
-    subsets: ["latin"],
-    variable: "--font-mulish",
-    weight: ["200", "300", "500", "800", "900"],
+    subsets: ['latin'],
+    variable: '--font-mulish',
+    weight: ['200', '300', '500', '800', '900'],
 });
 
 export const metadata: Metadata = {
-    title: "Russel Aniel",
+    title: 'Russel Aniel',
     description: "Russel Aniel's Portfolio",
 };
 
@@ -31,9 +29,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <div>
-                        <Sidebar>{children}</Sidebar>
-                    </div>
+                    {children}
                 </ThemeProvider>
             </body>
         </html>
