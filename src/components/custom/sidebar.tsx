@@ -1,23 +1,14 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { LuGithub, LuLinkedin } from "react-icons/lu";
-
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import Link from "next/link";
-
-import { ArrowDownToLine, Code, Menu } from "lucide-react";
-
-import MainMenu from "@/components/custom/main-menu";
-import { Button } from "@/components/ui/button";
+import MainMenu from '@/components/custom/main-menu';
+import { Button } from '@/components/ui/button';
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
     Sheet,
     SheetContent,
@@ -25,24 +16,30 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
+import { ArrowDownToLine, Code, Menu } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { LuGithub, LuLinkedin } from 'react-icons/lu';
 
 const socialMedias = [
     {
-        title: "LinkedIn",
+        title: 'LinkedIn',
         icon: LuLinkedin,
-        url: "https://www.linkedin.com/in/russel-aniel-48353820b/",
+        url: 'https://www.linkedin.com/in/russel-aniel-48353820b/',
     },
     {
-        title: "Github",
+        title: 'Github',
         icon: LuGithub,
-        url: "https://github.com/anielrussel",
+        url: 'https://github.com/anielrussel',
     },
 ];
 
@@ -54,7 +51,7 @@ export default function Sidebar({
     const [exp, setExp] = useState<number>(0);
 
     // Determine the active theme
-    const currentTheme = theme === "system" ? systemTheme : theme;
+    const currentTheme = theme === 'system' ? systemTheme : theme;
 
     // Calculate the years of experience dynamically
     useEffect(() => {
@@ -72,7 +69,7 @@ export default function Sidebar({
 
             setExp(yearDiff);
         };
-        calculateExperience("08/07/2023");
+        calculateExperience('08/07/2023');
     }, [exp]);
 
     useEffect(() => {
@@ -91,7 +88,7 @@ export default function Sidebar({
                     <SheetTrigger asChild>
                         <Menu />
                     </SheetTrigger>
-                    <SheetContent side={"left"}>
+                    <SheetContent side={'left'}>
                         <SheetHeader>
                             <SheetTitle className="sr-only">Profile</SheetTitle>
                             <SheetDescription className="sr-only">
@@ -108,7 +105,7 @@ export default function Sidebar({
                                 </div>
                                 <div className=" relative h-52 rounded-xl w-full border">
                                     <Image
-                                        src={"/profile.webp"}
+                                        src={'/profile.webp'}
                                         alt="profile"
                                         fill
                                         objectFit="cover"
@@ -159,7 +156,7 @@ export default function Sidebar({
 
                             <section>
                                 <Button
-                                    variant={"default"}
+                                    variant={'default'}
                                     className="rounded-full w-full"
                                 >
                                     Download CV <ArrowDownToLine />
@@ -183,16 +180,16 @@ export default function Sidebar({
                     <div className="flex flex-col justify-between h-full">
                         <section>
                             <div className="flex gap-3 items-center pb-2">
-                                {currentTheme === "dark" ? (
+                                {currentTheme === 'dark' ? (
                                     <Image
-                                        src={"/white_logo.webp"}
+                                        src={'/white_logo.webp'}
                                         alt="logo"
                                         width={60}
                                         height={0}
                                     />
                                 ) : (
                                     <Image
-                                        src={"/dark_logo.webp"}
+                                        src={'/dark_logo.webp'}
                                         alt="logo"
                                         width={60}
                                         height={0}
@@ -206,7 +203,7 @@ export default function Sidebar({
                             </div>
                             <div className=" relative h-52 rounded-xl w-full border">
                                 <Image
-                                    src={"/profile.webp"}
+                                    src={'/profile.webp'}
                                     alt="profile"
                                     fill
                                     objectFit="cover"
@@ -258,12 +255,12 @@ export default function Sidebar({
 
                         <section>
                             <Link
-                                href={"/Russel M. Aniel.pdf"}
+                                href={'/Russel M. Aniel.pdf'}
                                 download
                                 target="_blank"
                             >
                                 <Button
-                                    variant={"default"}
+                                    variant={'default'}
                                     className="rounded-full w-full"
                                 >
                                     Download CV <ArrowDownToLine />

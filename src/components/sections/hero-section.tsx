@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from "react";
-
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import Link from "next/link";
-
-import { ArrowDown, ArrowDownToLine, FileCode2 } from "lucide-react";
-
-import CircularText from "@/components/custom/circular-text";
-import { Button } from "@/components/ui/button";
+import CircularText from '@/components/custom/circular-text';
+import { Button } from '@/components/ui/button';
+import { ArrowDown, ArrowDownToLine, FileCode2 } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 
 export default function HeroSection() {
     const { theme, systemTheme } = useTheme();
     const [mounted, setMounted] = useState<boolean>(false);
 
     // Determine the active theme
-    const currentTheme = theme === "system" ? systemTheme : theme;
+    const currentTheme = theme === 'system' ? systemTheme : theme;
 
     useEffect(() => {
         setMounted(true);
@@ -31,14 +28,14 @@ export default function HeroSection() {
         >
             {/* BACKGROUNDS */}
             <Image
-                src={"/background.webp"}
+                src={'/background.webp'}
                 alt="bg_1"
                 className="fixed -right-[200px] -top-[300px] -z-10 opacity-30 blur-xl"
                 width={800}
                 height={800}
             />
             <Image
-                src={"/background.webp"}
+                src={'/background.webp'}
                 alt="bg_1"
                 className="fixed -left-10 bottom-0 -z-10 opacity-20 blur-xl"
                 width={500}
@@ -53,7 +50,7 @@ export default function HeroSection() {
                     </h1>
                     <section className="space-x-5">
                         <Button
-                            variant={"outline"}
+                            variant={'outline'}
                             className="rounded-full text-sm"
                             onClick={() => scrollTo(0, 800)}
                         >
@@ -66,7 +63,7 @@ export default function HeroSection() {
                             target="_blank"
                         >
                             <Button
-                                variant={"outline"}
+                                variant={'outline'}
                                 className="rounded-full"
                             >
                                 Download CV <ArrowDownToLine />
@@ -83,7 +80,7 @@ export default function HeroSection() {
                                 radius={70}
                                 padding={10}
                                 color={
-                                    currentTheme === "dark" ? "white" : "black"
+                                    currentTheme === 'dark' ? 'white' : 'black'
                                 } // Set color based on theme
                             />
                         </div>

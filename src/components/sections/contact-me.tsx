@@ -1,17 +1,14 @@
-import React from "react";
-
-import Link from "next/link";
-
-import { Code } from "lucide-react";
-
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
-import { contacts } from "@/lib/constants";
+} from '@/components/ui/card';
+import { contacts } from '@/lib/constants';
+import { Code } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
 
 export default function ContactMe() {
     return (

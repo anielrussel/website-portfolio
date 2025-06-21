@@ -1,13 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-
-import Link from "next/link";
-
-import { EllipsisVertical } from "lucide-react";
-
-import ColorTheme from "@/components/custom/color-theme";
-import { Button } from "@/components/ui/button";
+import ColorTheme from '@/components/custom/color-theme';
+import { Button } from '@/components/ui/button';
 import {
     Sheet,
     SheetContent,
@@ -15,8 +9,11 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "@/components/ui/sheet";
-import { pages } from "@/lib/constants";
+} from '@/components/ui/sheet';
+import { pages } from '@/lib/constants';
+import { EllipsisVertical } from 'lucide-react';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 
 export default function MainMenu() {
     const [activeLink, setActiveLink] = useState(pages[0].url);
@@ -55,7 +52,7 @@ export default function MainMenu() {
                     <SheetTrigger asChild>
                         <EllipsisVertical />
                     </SheetTrigger>
-                    <SheetContent side={"right"}>
+                    <SheetContent side={'right'}>
                         <SheetHeader>
                             <SheetTitle className="sr-only">
                                 Main Menu
@@ -72,8 +69,8 @@ export default function MainMenu() {
                                         <Button
                                             variant={
                                                 activeLink === menu.url
-                                                    ? "outline"
-                                                    : "ghost"
+                                                    ? 'outline'
+                                                    : 'ghost'
                                             }
                                             className="rounded-full backdrop-blur-sm"
                                         >
@@ -99,8 +96,8 @@ export default function MainMenu() {
                                 <Button
                                     variant={
                                         activeLink === menu.url
-                                            ? "outline"
-                                            : "ghost"
+                                            ? 'outline'
+                                            : 'ghost'
                                     }
                                     className="rounded-full backdrop-blur-sm"
                                 >
