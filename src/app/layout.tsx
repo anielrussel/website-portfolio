@@ -1,6 +1,7 @@
-import { ThemeProvider } from '@/components/custom/theme-provider';
 import type { Metadata } from 'next';
 import { Mulish } from 'next/font/google';
+
+import { ThemeProvider } from '@/components/custom/theme-provider';
 
 import './globals.css';
 

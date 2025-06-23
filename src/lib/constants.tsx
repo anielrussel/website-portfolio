@@ -1,9 +1,10 @@
+import { Mail, Smartphone } from 'lucide-react';
+import { LuGithub, LuLinkedin } from 'react-icons/lu';
+
 import ContactMe from '@/components/sections/contact-me';
 import HeroSection from '@/components/sections/hero-section';
 import Projects from '@/components/sections/projects';
 import Skills from '@/components/sections/skills';
-import { Mail, Smartphone } from 'lucide-react';
-import { LuGithub, LuLinkedin } from 'react-icons/lu';
 
 export const pages = [
     {
@@ -259,3 +260,12 @@ export const contacts = [
         icon: LuGithub,
     },
 ];
+
+export const TOKENKEYCOOKIENAME = 'token';
+export const REFRESHTOKENKEYCOOKIENAME = 'rftoken';
+export const USERIDCOOKIENAME = 'id';
+
+export const NOT_PROTECTED_ROUTES = ['/login', '/register'];
+export const ADMIN_ROUTE = '/admin';
+export const LOGIN_ROUTE = '/login';
+export const PUBLIC_ROUTE = '/';
