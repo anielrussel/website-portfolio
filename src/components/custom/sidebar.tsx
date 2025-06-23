@@ -1,5 +1,13 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
+
+import { ArrowDownToLine, Code, Menu } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import Image from 'next/image';
+import Link from 'next/link';
+import { LuGithub, LuLinkedin } from 'react-icons/lu';
+
 import MainMenu from '@/components/custom/main-menu';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,12 +31,6 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { ArrowDownToLine, Code, Menu } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { LuGithub, LuLinkedin } from 'react-icons/lu';
 
 const socialMedias = [
     {
@@ -103,7 +105,7 @@ export default function Sidebar({
                                         Russel Aniel
                                     </h1>
                                 </div>
-                                <div className=" relative h-52 rounded-xl w-full border">
+                                <div className="relative h-52 rounded-xl w-full border">
                                     <Image
                                         src={'/profile.webp'}
                                         alt="profile"

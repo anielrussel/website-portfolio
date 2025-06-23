@@ -1,10 +1,14 @@
-import CircularText from '@/components/custom/circular-text';
-import { Button } from '@/components/ui/button';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+
 import { ArrowDown, ArrowDownToLine, FileCode2 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+
+import CircularText from '@/components/custom/circular-text';
+import { Button } from '@/components/ui/button';
 
 export default function HeroSection() {
     const { theme, systemTheme } = useTheme();

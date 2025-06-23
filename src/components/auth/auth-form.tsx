@@ -1,7 +1,15 @@
 'use client';
 
+import { ComponentProps, useTransition } from 'react';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { ComponentProps } from 'react';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
+import { loginAsync } from '@/app/actions/auth-actions';
+import { setAuthCookies } from '@/app/actions/cookie-actions';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -10,17 +18,57 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { ADMIN_ROUTE } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-
-
+import { loginSchema } from '@/schema/auth-schema';
 
 interface AuthFormProps extends ComponentProps<'div'> {
     mode: 'login' | 'register';
 }
 
 export function AuthForm({ mode, className, ...props }: AuthFormProps) {
+    const [isPending, startTransition] = useTransition();
+
+    const router = useRouter();
+
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
+        defaultValues: {
+            username: '',
+            password: '',
+        },
+    });
+
+    const handleLogin = (values: z.infer<typeof loginSchema>) => {
+        startTransition(async () => {
+            try {
+                const response = await loginAsync(values);
+                if (response.success) {
+                    const id = response.data.user.id;
+                    const token = response.data.token;
+                    const refreshToken = response.data.refreshToken;
+
+                    await setAuthCookies(id, token, refreshToken);
+
+                    router.push(ADMIN_ROUTE);
+                } else {
+                    alert('Login failed');
+                }
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        });
+    };
     return (
         <div className={cn('flex flex-col gap-6', className)} {...props}>
             <Card>
@@ -29,72 +77,104 @@ export function AuthForm({ mode, className, ...props }: AuthFormProps) {
                         {mode === 'login'
                             ? 'Login to your account'
                             : mode === 'register'
-                                ? 'Register an account'
-                                : ''}
+                              ? 'Register an account'
+                              : ''}
                     </CardTitle>
                     <CardDescription>
                         {`Enter your credentials below to ${mode === 'login' ? 'login' : mode === 'register' ? 'register' : ''} `}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form>
-                        <div className="flex flex-col gap-6">
-                            <div className="grid gap-3">
-                                <Label htmlFor="username">Username</Label>
-                                <Input
-                                    id="username"
-                                    type="text"
-                                    placeholder="Enter your username"
-                                    required
-                                />
-                            </div>
-                            <div className="grid gap-3">
-                                <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
-                                    {/* <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a> */}
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(handleLogin)}>
+                            <div className="flex flex-col gap-6">
+                                <div className="grid gap-3">
+                                    <FormField
+                                        control={form.control}
+                                        name="username"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Username</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="Enter your username"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
                                 </div>
-                                <Input
-                                    id="password"
-                                    type="password"
-                                    placeholder="Enter your password"
-                                    required
-                                />
+                                <div className="grid gap-3">
+                                    <FormField
+                                        control={form.control}
+                                        name="password"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Password</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="password"
+                                                        placeholder="Enter your password"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-3">
+                                    {isPending ? (
+                                        <Button
+                                            disabled={isPending}
+                                            type="submit"
+                                            className="w-full"
+                                        >
+                                            {mode === 'login'
+                                                ? ' Logging in...'
+                                                : mode === 'register'
+                                                  ? 'Registering...'
+                                                  : ''}
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            disabled={isPending}
+                                            type="submit"
+                                            className="w-full"
+                                        >
+                                            {mode === 'login'
+                                                ? ' Login'
+                                                : mode === 'register'
+                                                  ? 'Register'
+                                                  : ''}
+                                        </Button>
+                                    )}
+                                </div>
                             </div>
-                            <div className="flex flex-col gap-3">
-                                <Button type="submit" className="w-full">
+                            <div className="mt-4 text-center text-sm">
+                                {`${mode === 'login' ? "Don't" : mode === 'register' ? 'Already' : ''} have an account?`}
+                                <Link
+                                    href={
+                                        mode === 'login'
+                                            ? '/register'
+                                            : mode === 'register'
+                                              ? '/login'
+                                              : '#'
+                                    }
+                                    className="underline underline-offset-4"
+                                >
                                     {mode === 'login'
-                                        ? ' Login'
+                                        ? ' Register'
                                         : mode === 'register'
-                                            ? 'Register'
-                                            : ''}
-                                </Button>
+                                          ? ' Login'
+                                          : ''}
+                                </Link>
                             </div>
-                        </div>
-                        <div className="mt-4 text-center text-sm">
-                            {`${mode === 'login' ? "Don't" : mode === 'register' ? 'Already' : ''} have an account?`}
-                            <Link
-                                href={
-                                    mode === 'login'
-                                        ? '/register'
-                                        : mode === 'register'
-                                            ? '/login'
-                                            : '#'
-                                }
-                                className="underline underline-offset-4"
-                            >
-                                {mode === 'login'
-                                    ? ' Register'
-                                    : mode === 'register'
-                                        ? ' Login'
-                                        : ''}
-                            </Link>
-                        </div>
-                    </form>
+                        </form>
+                    </Form>
                 </CardContent>
             </Card>
         </div>
