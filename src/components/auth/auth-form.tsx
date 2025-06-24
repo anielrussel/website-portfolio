@@ -1,8 +1,9 @@
 'use client';
 
-import { ComponentProps, useTransition } from 'react';
+import { ComponentProps, useState, useTransition } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AlertCircleIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -10,6 +11,7 @@ import { z } from 'zod';
 
 import { loginAsync } from '@/app/actions/auth-actions';
 import { setAuthCookies } from '@/app/actions/cookie-actions';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -37,6 +39,7 @@ interface AuthFormProps extends ComponentProps<'div'> {
 
 export function AuthForm({ mode, className, ...props }: AuthFormProps) {
     const [isPending, startTransition] = useTransition();
+    const [isLoginError, setIsLoginError] = useState<string>('');
 
     const router = useRouter();
 
@@ -58,10 +61,10 @@ export function AuthForm({ mode, className, ...props }: AuthFormProps) {
                     const refreshToken = response.data.refreshToken;
 
                     await setAuthCookies(id, token, refreshToken);
-
+                    setIsLoginError('');
                     router.push(ADMIN_ROUTE);
                 } else {
-                    alert('Login failed');
+                    setIsLoginError('Username or Password is incorrect');
                 }
             } catch (error) {
                 console.error(error);
@@ -85,6 +88,13 @@ export function AuthForm({ mode, className, ...props }: AuthFormProps) {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
+                    {isLoginError && (
+                        <Alert variant="destructive" className="text-red-500">
+                            <AlertCircleIcon />
+                            <AlertTitle>Login Failed!</AlertTitle>
+                            <AlertDescription>{isLoginError}</AlertDescription>
+                        </Alert>
+                    )}
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(handleLogin)}>
                             <div className="flex flex-col gap-6">
@@ -94,7 +104,11 @@ export function AuthForm({ mode, className, ...props }: AuthFormProps) {
                                         name="username"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>Username</FormLabel>
+                                                <FormLabel
+                                                    className={`${form.formState.errors.username && 'text-red-500'}`}
+                                                >
+                                                    Username
+                                                </FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -102,7 +116,7 @@ export function AuthForm({ mode, className, ...props }: AuthFormProps) {
                                                         {...field}
                                                     />
                                                 </FormControl>
-                                                <FormMessage />
+                                                <FormMessage className="text-red-500" />
                                             </FormItem>
                                         )}
                                     />
@@ -113,7 +127,11 @@ export function AuthForm({ mode, className, ...props }: AuthFormProps) {
                                         name="password"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>Password</FormLabel>
+                                                <FormLabel
+                                                    className={`${form.formState.errors.password && 'text-red-500'}`}
+                                                >
+                                                    Password
+                                                </FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="password"
@@ -121,7 +139,7 @@ export function AuthForm({ mode, className, ...props }: AuthFormProps) {
                                                         {...field}
                                                     />
                                                 </FormControl>
-                                                <FormMessage />
+                                                <FormMessage className="text-red-500" />
                                             </FormItem>
                                         )}
                                     />

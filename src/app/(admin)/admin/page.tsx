@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 
 import { deleteCookie } from '@/app/actions/cookie-actions';
 import Profile from '@/components/admin/profile';
+import Skills from '@/components/admin/skills';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -39,7 +40,7 @@ export default function AdminPage() {
         {
             value: 'skills',
             title: 'Skills',
-            component: null,
+            component: <Skills />,
         },
         {
             value: 'projects',
