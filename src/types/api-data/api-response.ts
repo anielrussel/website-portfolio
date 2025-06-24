@@ -1,5 +1,6 @@
-import { api, setBaseUrl } from '@/lib/api';
 import axios from 'axios';
+
+import { api, setBaseUrl } from '@/lib/api';
 
 export type ApiDataResponse = {
     success: boolean;

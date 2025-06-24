@@ -265,7 +265,6 @@ export const TOKENKEYCOOKIENAME = 'token';
 export const REFRESHTOKENKEYCOOKIENAME = 'rftoken';
 export const USERIDCOOKIENAME = 'id';
 
-export const NOT_PROTECTED_ROUTES = ['/login', '/register'];
+export const NOT_PROTECTED_ROUTES = ['/', '/login', '/register'];
 export const ADMIN_ROUTE = '/admin';
 export const LOGIN_ROUTE = '/login';
-export const PUBLIC_ROUTE = '/';

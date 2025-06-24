@@ -36,7 +36,7 @@ export async function setAuthCookies(
 export async function getCookie(name: string) {
     const cookieStore = await cookies();
 
-    cookieStore.get(name)?.value;
+    return cookieStore.get(name)?.value;
 }
 
 export async function deleteCookie(cookieName: string | string[]) {

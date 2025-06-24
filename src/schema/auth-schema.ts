@@ -8,3 +8,8 @@ export const loginSchema = z.object({
         message: 'Password is required',
     }),
 });
+
+export const refreshTokenSchema = z.object({
+    userId: z.number({ required_error: 'user id is required' }),
+    refreshToken: z.string({ required_error: 'refresh token is required' }),
+});
