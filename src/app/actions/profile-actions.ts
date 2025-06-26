@@ -43,9 +43,13 @@ export async function updateProfileAsync(
     profileId: number,
     request: z.infer<typeof profileSchema>,
 ): Promise<ApiDataResponse> {
-    const record = await putData<ApiDataResponse>(`/profiles${profileId}`, '', {
-        ...request,
-    });
+    const record = await putData<ApiDataResponse>(
+        `/profiles/${profileId}`,
+        '',
+        {
+            ...request,
+        },
+    );
 
     return record;
 }

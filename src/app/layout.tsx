@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Mulish } from 'next/font/google';
 
 import { ThemeProvider } from '@/components/custom/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
 
 import './globals.css';
 
@@ -30,7 +31,8 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    {children}
+                    <main>{children}</main>
+                    <Toaster position="top-center" />
                 </ThemeProvider>
             </body>
         </html>

@@ -15,7 +15,4 @@ export const profileSchema = z.object({
     userId: z.union([z.number(), z.null()]).optional(),
     email: z.union([z.string(), z.null()]),
     contactNo: z.union([z.string(), z.null()]),
-    socialLinks: z.array(z.string()),
-    skills: z.array(z.string()),
-    projects: z.array(z.string()),
 });

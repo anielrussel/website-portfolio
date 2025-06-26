@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Edit, Phone, Save, User, X } from 'lucide-react';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import {
@@ -16,11 +17,22 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { uploadImageToCloudinary } from '@/lib/general-helper';
 import { profileSchema } from '@/schema/profile-schema';
 import { useProfileStore } from '@/store/api-data/profile-store';
 
+type FileState = {
+    image: File | null;
+    preview: string | null;
+};
+
 export default function Profile() {
     const { profile, loadProfile, updateProfile } = useProfileStore();
+
+    const [imageValue, setImageValue] = useState<FileState | null>({
+        image: null,
+        preview: null,
+    });
     const [isEditing, setIsEditing] = useState<boolean>(false);
 
     const {
@@ -28,7 +40,6 @@ export default function Profile() {
         handleSubmit,
         reset,
         formState: { errors, isSubmitting },
-        setValue,
     } = useForm<z.infer<typeof profileSchema>>({
         resolver: zodResolver(profileSchema),
         defaultValues: {
@@ -40,9 +51,6 @@ export default function Profile() {
             email: '',
             contactNo: '',
             address: '',
-            skills: [],
-            projects: [],
-            socialLinks: [],
             userId: 0,
             image: '',
         },
@@ -52,16 +60,53 @@ export default function Profile() {
         if (isEditing) {
             // Reset form when canceling edit
             reset();
+            setImageValue({ image: null, preview: null });
         }
         setIsEditing((prev) => !prev);
     };
 
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+
+        if (file) {
+            const sizeInBytes = file.size;
+            const sizeInMB = sizeInBytes / (1024 * 1024); // Convert bytes to MB
+
+            if (sizeInMB > 1) {
+                toast.error(
+                    `File size: ${sizeInMB.toFixed(2)} MB. File size must not exceed 1MB`,
+                );
+
+                return;
+            }
+
+            setImageValue({
+                image: file,
+                preview: URL.createObjectURL(file),
+            });
+        }
+    };
+
     const onSubmit = async (data: z.infer<typeof profileSchema>) => {
         try {
+            if (imageValue?.image) {
+                const imageUrl = await uploadImageToCloudinary(
+                    imageValue.image,
+                );
+
+                console.log(imageUrl);
+
+                if (imageUrl) data.image = imageUrl.secure_url;
+            }
+
             const response = await updateProfileAsync(data.id, data);
             if (response.success) {
                 updateProfile(response.data);
+
+                toast.success('Profile updated');
                 setIsEditing(false);
+            } else {
+                toast.error('Failed to update profile');
             }
         } catch (error) {
             console.error(error);
@@ -84,9 +129,6 @@ export default function Profile() {
                     email: response.data.email || '',
                     contactNo: response.data.contactNo || '',
                     address: response.data.address || '',
-                    skills: response.data.skills || '',
-                    projects: response.data.projects || '',
-                    socialLinks: response.data.socialLinks || '',
                     image: response.data.image || '',
                     userId: response.data.userId || 0,
                 });
@@ -113,28 +155,11 @@ export default function Profile() {
                 email: profile.email || '',
                 contactNo: profile.contactNo || '',
                 address: profile.address || '',
-                skills: Array.isArray(profile.skills)
-                    ? profile.skills.map((skill: any) =>
-                          typeof skill === 'string' ? skill : skill.name,
-                      )
-                    : [],
-                projects: Array.isArray(profile.projects)
-                    ? profile.projects.map((project: any) =>
-                          typeof project === 'string' ? project : project.name,
-                      )
-                    : [],
-                socialLinks: Array.isArray(profile.socialLinks)
-                    ? profile.socialLinks.map((social: any) =>
-                          typeof social === 'string' ? social : social.name,
-                      )
-                    : [],
                 image: profile.image || '',
                 userId: profile.userId || 0,
             });
         }
     }, [profile, reset]);
-
-    console.log(errors);
 
     return (
         <div className="w-full mx-auto py-2 px-4 space-y-6">
@@ -184,7 +209,11 @@ export default function Profile() {
                 <div className="flex items-end gap-2 mb-6">
                     <div className="relative h-36 rounded-xl w-44 border">
                         <Image
-                            src={profile?.image || '/profile.webp'}
+                            src={
+                                imageValue?.preview ||
+                                profile?.image ||
+                                '/profile.webp'
+                            }
                             fill
                             objectFit="cover"
                             objectPosition="center"
@@ -197,14 +226,8 @@ export default function Profile() {
                             <Input
                                 type="file"
                                 accept="image/*"
-                                onChange={(e) => {
-                                    const file = e.target.files?.[0];
-                                    if (file) {
-                                        // Handle file upload logic here
-                                        // For now, just set the filename
-                                        setValue('image', file.name);
-                                    }
-                                }}
+                                maxLength={1}
+                                onChange={handleImageChange}
                             />
                             {errors.image && (
                                 <p className="text-sm text-red-500 mt-1">
@@ -245,7 +268,7 @@ export default function Profile() {
                                         </div>
                                     ) : (
                                         <p className="font-medium">
-                                            {profile?.firstName}
+                                            {profile?.firstName || 'n/a'}
                                         </p>
                                     )}
                                 </div>
@@ -267,7 +290,7 @@ export default function Profile() {
                                         </div>
                                     ) : (
                                         <p className="font-medium">
-                                            {profile?.lastName}
+                                            {profile?.lastName || 'n/a'}
                                         </p>
                                     )}
                                 </div>
@@ -290,7 +313,7 @@ export default function Profile() {
                                     </div>
                                 ) : (
                                     <p className="font-medium">
-                                        {profile?.middleName}
+                                        {profile?.middleName || 'n/a'}
                                     </p>
                                 )}
                             </div>
@@ -312,7 +335,7 @@ export default function Profile() {
                                     </div>
                                 ) : (
                                     <p className="font-medium">
-                                        {profile?.position}
+                                        {profile?.position || 'n/a'}
                                     </p>
                                 )}
                             </div>
@@ -346,7 +369,7 @@ export default function Profile() {
                                     </div>
                                 ) : (
                                     <p className="font-medium">
-                                        {profile?.email}
+                                        {profile?.email || 'n/a'}
                                     </p>
                                 )}
                             </div>
@@ -368,7 +391,7 @@ export default function Profile() {
                                     </div>
                                 ) : (
                                     <p className="font-medium">
-                                        {profile?.contactNo}
+                                        {profile?.contactNo || 'n/a'}
                                     </p>
                                 )}
                             </div>
@@ -390,7 +413,7 @@ export default function Profile() {
                                     </div>
                                 ) : (
                                     <p className="font-medium text-sm leading-relaxed">
-                                        {profile?.address}
+                                        {profile?.address || 'n/a'}
                                     </p>
                                 )}
                             </div>
@@ -404,7 +427,7 @@ export default function Profile() {
                         <CardTitle>Skills and Projects</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="space-y-4">
+                        {/* <div className="space-y-4">
                             <div>
                                 <Label className="text-sm text-muted-foreground">
                                     Skills
@@ -480,7 +503,7 @@ export default function Profile() {
                                     </p>
                                 )}
                             </div>
-                        </div>
+                        </div> */}
                     </CardContent>
                 </Card>
             </form>
