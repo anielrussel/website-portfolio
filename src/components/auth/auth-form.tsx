@@ -1,6 +1,6 @@
 'use client';
 
-import { ComponentProps, useState, useTransition } from 'react';
+import { ComponentProps, useEffect, useState, useTransition } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AlertCircleIcon } from 'lucide-react';
@@ -30,14 +30,17 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { ADMIN_ROUTE } from '@/lib/constants';
-import { cn } from '@/lib/utils';
+import { clearAllStores, cn } from '@/lib/utils';
 import { loginSchema } from '@/schema/auth-schema';
+import { useAuthStore } from '@/store/api-data/auth-store';
 
 interface AuthFormProps extends ComponentProps<'div'> {
     mode: 'login' | 'register';
 }
 
 export function AuthForm({ mode, className, ...props }: AuthFormProps) {
+    const { loadAuthUser } = useAuthStore();
+
     const [isPending, startTransition] = useTransition();
     const [isLoginError, setIsLoginError] = useState<string>('');
 
@@ -61,6 +64,8 @@ export function AuthForm({ mode, className, ...props }: AuthFormProps) {
                     const refreshToken = response.data.refreshToken;
 
                     await setAuthCookies(id, token, refreshToken);
+                    loadAuthUser(response.data);
+
                     setIsLoginError('');
                     router.push(ADMIN_ROUTE);
                 } else {
@@ -72,6 +77,10 @@ export function AuthForm({ mode, className, ...props }: AuthFormProps) {
             }
         });
     };
+
+    useEffect(() => {
+        clearAllStores();
+    }, []);
     return (
         <div className={cn('flex flex-col gap-6', className)} {...props}>
             <Card>

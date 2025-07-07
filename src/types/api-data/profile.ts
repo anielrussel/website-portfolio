@@ -1,3 +1,11 @@
+import { ProjectType } from './project';
+import { SocialLinksType } from './social-links';
+
+type ProfileSkillResponseType = {
+    profileId: number;
+    skillId: number;
+};
+
 export type ProfileType = {
     id: number;
     firstName: string;
@@ -9,7 +17,7 @@ export type ProfileType = {
     userId: number;
     email: string;
     contactNo: string;
-    socialLinks: object[];
-    skills: object[];
-    projects: object[];
+    socialLinks: SocialLinksType[];
+    skills: ProfileSkillResponseType[];
+    projects: ProjectType[];
 };

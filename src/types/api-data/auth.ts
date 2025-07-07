@@ -1,4 +1,4 @@
-import { UserType } from './user-type';
+import { UserType } from './user';
 
 export type AuthResponseType = {
     user: UserType;
