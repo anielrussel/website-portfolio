@@ -6,8 +6,10 @@ import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import { deleteCookie } from '@/app/actions/cookie-actions';
-import Profile from '@/components/admin/profile';
-import Skills from '@/components/admin/skills';
+import Profile from '@/components/admin/profile/profile';
+import Projects from '@/components/admin/projects/projects';
+import Skills from '@/components/admin/skills/skills';
+import Socials from '@/components/admin/socials/socials';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -45,12 +47,12 @@ export default function AdminPage() {
         {
             value: 'projects',
             title: 'Projects',
-            component: null,
+            component: <Projects />,
         },
         {
             value: 'social',
             title: 'Socials',
-            component: null,
+            component: <Socials />,
         },
     ];
 

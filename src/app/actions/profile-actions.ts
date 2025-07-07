@@ -3,6 +3,7 @@
 import { z } from 'zod';
 
 import { profileSchema } from '@/schema/profile-schema';
+import { profileSkillSchema } from '@/schema/profile-skill-schema';
 import {
     ApiDataResponse,
     getData,
@@ -62,6 +63,18 @@ export async function deleteProfileAsync(
         '',
         {},
     );
+
+    return record;
+}
+
+// ASSIGN SKILLS TO PROFILE
+
+export async function createProfileSkillAsync(
+    request: z.infer<typeof profileSkillSchema>,
+): Promise<ApiDataResponse> {
+    const record = await postData<ApiDataResponse>('/profiles/skills', '', {
+        ...request,
+    });
 
     return record;
 }

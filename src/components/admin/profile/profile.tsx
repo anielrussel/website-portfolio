@@ -19,14 +19,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { uploadImageToCloudinary } from '@/lib/general-helper';
 import { profileSchema } from '@/schema/profile-schema';
+import { useAuthStore } from '@/store/api-data/auth-store';
 import { useProfileStore } from '@/store/api-data/profile-store';
+import { FileState } from '@/types/general';
 
-type FileState = {
-    image: File | null;
-    preview: string | null;
-};
+import ProfileProject from './profile-project';
+import ProfileSkill from './profile-skill';
 
 export default function Profile() {
+    const { authUser } = useAuthStore();
     const { profile, loadProfile, updateProfile } = useProfileStore();
 
     const [imageValue, setImageValue] = useState<FileState | null>({
@@ -116,7 +117,10 @@ export default function Profile() {
 
     const fetchProfileById = async () => {
         try {
-            const response = await getProfileByIdAsync(1);
+            const userId = authUser?.user.id;
+
+            const response = await getProfileByIdAsync(userId ?? 1);
+            console.log(response.data);
             if (response.success) {
                 loadProfile(response.data);
                 // Reset form with fetched data
@@ -141,7 +145,7 @@ export default function Profile() {
 
     useEffect(() => {
         fetchProfileById();
-    }, []);
+    }, [authUser?.user.id]);
 
     // Update form when profile changes
     useEffect(() => {
@@ -226,7 +230,6 @@ export default function Profile() {
                             <Input
                                 type="file"
                                 accept="image/*"
-                                maxLength={1}
                                 onChange={handleImageChange}
                             />
                             {errors.image && (
@@ -420,93 +423,11 @@ export default function Profile() {
                         </CardContent>
                     </Card>
                 </div>
-
-                {/* Skills and Projects */}
-                <Card className="mt-6">
-                    <CardHeader>
-                        <CardTitle>Skills and Projects</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        {/* <div className="space-y-4">
-                            <div>
-                                <Label className="text-sm text-muted-foreground">
-                                    Skills
-                                </Label>
-                                {isEditing ? (
-                                    <div>
-                                        <Input
-                                            type="text"
-                                            {...register('skills')}
-                                        />
-                                        {errors.skills && (
-                                            <p className="text-sm text-red-500 mt-1">
-                                                {errors.skills.message}
-                                            </p>
-                                        )}
-                                    </div>
-                                ) : (
-                                    <p className="font-medium text-sm leading-relaxed">
-                                        {Array.isArray(profile?.skills)
-                                            ? profile.skills.map(
-                                                  (skill: any, idx: number) => (
-                                                      <span
-                                                          key={idx}
-                                                          className="inline-block mr-2"
-                                                      >
-                                                          {typeof skill ===
-                                                          'string'
-                                                              ? skill
-                                                              : skill?.name}
-                                                      </span>
-                                                  ),
-                                              )
-                                            : null}
-                                    </p>
-                                )}
-                            </div>
-                            <div>
-                                <Label className="text-sm text-muted-foreground">
-                                    Projects
-                                </Label>
-                                {isEditing ? (
-                                    <div>
-                                        <Input
-                                            type="text"
-                                            {...register('projects')}
-                                        />
-                                        {errors.projects && (
-                                            <p className="text-sm text-red-500 mt-1">
-                                                {errors.projects.message}
-                                            </p>
-                                        )}
-                                    </div>
-                                ) : (
-                                    <p className="font-medium text-sm leading-relaxed">
-                                        {Array.isArray(profile?.projects)
-                                            ? profile.projects.map(
-                                                  (
-                                                      project: any,
-                                                      idx: number,
-                                                  ) => (
-                                                      <span
-                                                          key={idx}
-                                                          className="inline-block mr-2"
-                                                      >
-                                                          {typeof project ===
-                                                          'string'
-                                                              ? project
-                                                              : project?.name}
-                                                      </span>
-                                                  ),
-                                              )
-                                            : null}
-                                    </p>
-                                )}
-                            </div>
-                        </div> */}
-                    </CardContent>
-                </Card>
             </form>
+
+            <ProfileSkill />
+
+            <ProfileProject />
         </div>
     );
 }
