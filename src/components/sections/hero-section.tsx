@@ -32,14 +32,14 @@ export default function HeroSection() {
         >
             {/* BACKGROUNDS */}
             <Image
-                src={'/background.webp'}
+                src={'/assets/background.webp'}
                 alt="bg_1"
                 className="fixed -right-[200px] -top-[300px] -z-10 opacity-30 blur-xl"
                 width={800}
                 height={800}
             />
             <Image
-                src={'/background.webp'}
+                src={'/assets/background.webp'}
                 alt="bg_1"
                 className="fixed -left-10 bottom-0 -z-10 opacity-20 blur-xl"
                 width={500}
@@ -62,7 +62,7 @@ export default function HeroSection() {
                         </Button>
 
                         <Link
-                            href="/Russel M. Aniel.pdf"
+                            href={'/assets/myCV.pdf'}
                             download
                             target="_blank"
                         >

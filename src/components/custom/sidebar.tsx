@@ -31,6 +31,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useProfileStore } from '@/store/api-data/profile-store';
 
 const socialMedias = [
     {
@@ -48,6 +49,7 @@ const socialMedias = [
 export default function Sidebar({
     children,
 }: Readonly<{ children: React.ReactNode }>) {
+    const { profile } = useProfileStore();
     const { theme, systemTheme } = useTheme();
     const [mounted, setMounted] = useState<boolean>(false);
     const [exp, setExp] = useState<number>(0);
@@ -102,12 +104,13 @@ export default function Sidebar({
                                 <div className="flex gap-3 items-center pb-2">
                                     <Code size={60} />
                                     <h1 className="text-3xl font-semibold">
-                                        Russel Aniel
+                                        {`${profile?.firstName} ${profile?.lastName}` ||
+                                            'Russel Aniel'}
                                     </h1>
                                 </div>
                                 <div className="relative h-52 rounded-xl w-full border">
                                     <Image
-                                        src={'/profile.webp'}
+                                        src={'/assets/profile.webp'}
                                         alt="profile"
                                         fill
                                         objectFit="cover"
@@ -157,12 +160,18 @@ export default function Sidebar({
                             </section>
 
                             <section>
-                                <Button
-                                    variant={'default'}
-                                    className="rounded-full w-full"
+                                <Link
+                                    href={'/assets/myCV.pdf'}
+                                    download
+                                    target="_blank"
                                 >
-                                    Download CV <ArrowDownToLine />
-                                </Button>
+                                    <Button
+                                        variant={'default'}
+                                        className="rounded-full w-full"
+                                    >
+                                        Download CV <ArrowDownToLine />
+                                    </Button>
+                                </Link>
                             </section>
                         </div>
                     </SheetContent>
@@ -184,14 +193,14 @@ export default function Sidebar({
                             <div className="flex gap-3 items-center pb-2">
                                 {currentTheme === 'dark' ? (
                                     <Image
-                                        src={'/white_logo.webp'}
+                                        src={'/assets/white_logo.webp'}
                                         alt="logo"
                                         width={60}
                                         height={0}
                                     />
                                 ) : (
                                     <Image
-                                        src={'/dark_logo.webp'}
+                                        src={'/assets/dark_logo.webp'}
                                         alt="logo"
                                         width={60}
                                         height={0}
@@ -205,7 +214,7 @@ export default function Sidebar({
                             </div>
                             <div className=" relative h-52 rounded-xl w-full border">
                                 <Image
-                                    src={'/profile.webp'}
+                                    src={'/assets/profile.webp'}
                                     alt="profile"
                                     fill
                                     objectFit="cover"
@@ -257,7 +266,7 @@ export default function Sidebar({
 
                         <section>
                             <Link
-                                href={'/Russel M. Aniel.pdf'}
+                                href={'/assets/myCV.pdf'}
                                 download
                                 target="_blank"
                             >

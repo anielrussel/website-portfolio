@@ -1,3 +1,8 @@
+import React from 'react';
+
+import { Code } from 'lucide-react';
+import Image from 'next/image';
+
 import {
     Card,
     CardContent,
@@ -6,9 +11,6 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { skills } from '@/lib/constants';
-import { Code } from 'lucide-react';
-import Image from 'next/image';
-import React from 'react';
 
 export default function Skills() {
     const mainStack = skills.find((skill) => skill.main)?.main;

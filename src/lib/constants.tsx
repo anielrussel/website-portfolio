@@ -142,97 +142,97 @@ export const skills = [
         main: [
             {
                 title: 'Next.js',
-                icon: '/skills/nextjs.svg',
+                icon: '/assets/skills/nextjs.svg',
             },
             {
                 title: 'Typescript',
-                icon: '/skills/typescript.svg',
+                icon: '/assets/skills/typescript.svg',
             },
             {
                 title: 'Tailwind',
-                icon: '/skills/tailwind.svg',
+                icon: '/assets/skills/tailwind.svg',
             },
             {
                 title: 'Redux',
-                icon: '/skills/redux.svg',
+                icon: '/assets/skills/redux.svg',
             },
             {
                 title: 'Zustand',
-                icon: '/skills/zustand.svg',
+                icon: '/assets/skills/zustand.svg',
             },
             {
                 title: 'Shadcn',
-                icon: '/skills/shadcn.svg',
+                icon: '/assets/skills/shadcn.svg',
             },
             {
                 title: 'Axios',
-                icon: '/skills/axios.svg',
+                icon: '/assets/skills/axios.svg',
             },
         ],
         frontend: [
             {
                 title: 'Reactjs',
-                icon: '/skills/react.svg',
+                icon: '/assets/skills/react.svg',
             },
             {
                 title: 'Framer Motion',
-                icon: '/skills/framer.svg',
+                icon: '/assets/skills/framer.svg',
             },
             {
                 title: 'Figma',
-                icon: '/skills/figma.svg',
+                icon: '/assets/skills/figma.svg',
             },
             {
                 title: 'Ant Design',
-                icon: '/skills/antd.svg',
+                icon: '/assets/skills/antd.svg',
             },
             {
                 title: 'HeroUI',
-                icon: '/skills/heroui.svg',
+                icon: '/assets/skills/heroui.svg',
             },
         ],
         backend: [
             {
                 title: '.Net Core',
-                icon: '/skills/net.svg',
+                icon: '/assets/skills/net.svg',
             },
             {
                 title: 'SQL Server',
-                icon: '/skills/server.svg',
+                icon: '/assets/skills/server.svg',
             },
             {
                 title: 'Nodejs',
-                icon: '/skills/nodejs.svg',
+                icon: '/assets/skills/nodejs.svg',
             },
             {
                 title: 'Mongo DB',
-                icon: '/skills/mongodb.svg',
+                icon: '/assets/skills/mongodb.svg',
             },
             {
                 title: 'Pocketbase',
-                icon: '/skills/pocketbase.svg',
+                icon: '/assets/skills/pocketbase.svg',
             },
             {
                 title: 'Strapi CMS',
-                icon: '/skills/strapi.svg',
+                icon: '/assets/skills/strapi.svg',
             },
         ],
         others: [
             {
                 title: 'Azure',
-                icon: '/skills/azure.svg',
+                icon: '/assets/skills/azure.svg',
             },
             {
                 title: 'GitHub',
-                icon: '/skills/github.svg',
+                icon: '/assets/skills/github.svg',
             },
             {
                 title: 'Git',
-                icon: '/skills/git.svg',
+                icon: '/assets/skills/git.svg',
             },
             {
                 title: 'Postman',
-                icon: '/skills/postman.svg',
+                icon: '/assets/skills/postman.svg',
             },
         ],
     },
