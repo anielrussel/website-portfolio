@@ -158,12 +158,18 @@ export default function Sidebar({
                             </section>
 
                             <section>
-                                <Button
-                                    variant={"default"}
-                                    className="rounded-full w-full"
+                                <Link
+                                    href={"/myCV.pdf"}
+                                    download
+                                    target="_blank"
                                 >
-                                    Download CV <ArrowDownToLine />
-                                </Button>
+                                    <Button
+                                        variant={"default"}
+                                        className="rounded-full w-full"
+                                    >
+                                        Download CV <ArrowDownToLine />
+                                    </Button>
+                                </Link>
                             </section>
                         </div>
                     </SheetContent>
@@ -257,11 +263,7 @@ export default function Sidebar({
                         </section>
 
                         <section>
-                            <Link
-                                href={"/Russel M. Aniel.pdf"}
-                                download
-                                target="_blank"
-                            >
+                            <Link href={"/myCV.pdf"} download target="_blank">
                                 <Button
                                     variant={"default"}
                                     className="rounded-full w-full"
